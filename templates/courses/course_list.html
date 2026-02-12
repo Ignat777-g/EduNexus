@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>EduNexus</title>
+  </head>
+  <body>
+    <h1>Курсы</h1>
+    {% if courses %}
+      {% for course in courses %}
+        <section>
+          <h2>{{ course.title }}</h2>
+          <p>{{ course.description }}</p>
+          <p><strong>Преподаватель:</strong> {{ course.teacher.username }}</p>
+          <ul>
+            {% for lesson in course.lessons.all %}
+              <li>
+                {{ lesson.position }}. {{ lesson.title }}
+                {% if lesson.materials.all %}
+                  <ul>
+                    {% for material in lesson.materials.all %}
+                      <li>
+                        {{ material.get_material_type_display }}:
+                        <a href="{{ material.url }}">{{ material.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endfor %}
+    {% else %}
+      <p>Пока нет курсов. Добавьте первый курс через админку.</p>
+    {% endif %}
+  </body>
+</html>
