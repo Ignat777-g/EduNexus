@@ -1,1 +1,4 @@
 Django>=5.0,<6.0
+env | rg -i 'proxy'
+unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+pip install -r requirements.txt
